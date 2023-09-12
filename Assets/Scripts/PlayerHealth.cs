@@ -28,7 +28,7 @@ public class PlayerHealth : MonoBehaviour
         {
             Die();
         }
-        Debug.Log(currentHealth);
+        
     }
 
 
