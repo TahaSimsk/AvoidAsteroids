@@ -30,12 +30,12 @@ public class AdsHandler : MonoBehaviour
     {
         IronSource.Agent.validateIntegration();
         IronSource.Agent.init(appKey);
-        
+
     }
 
     private void OnEnable()
     {
-        LoadBanner();
+        //LoadBanner();
         IronSourceEvents.onSdkInitializationCompletedEvent += SDKInitialized;
 
         //Add AdInfo Banner Events
@@ -63,7 +63,7 @@ public class AdsHandler : MonoBehaviour
     void SDKInitialized()
     {
         print("Sdk is initialized !!");
-        
+        LoadBanner();
     }
 
     private void OnApplicationPause(bool pause)
@@ -71,7 +71,7 @@ public class AdsHandler : MonoBehaviour
         IronSource.Agent.onApplicationPause(pause);
     }
 
-    void LoadBanner()
+    public void LoadBanner()
     {
         IronSource.Agent.loadBanner(IronSourceBannerSize.BANNER, IronSourceBannerPosition.BOTTOM);
 
