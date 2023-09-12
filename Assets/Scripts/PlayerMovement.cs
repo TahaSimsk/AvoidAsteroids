@@ -97,32 +97,34 @@ public class PlayerMovement : MonoBehaviour
         if (playerViewportPos.x >= 0.98)
         {
             originalPlayerPos.x = -originalPlayerPos.x + 1f;
-            transform.position = originalPlayerPos;
+            
         }
 
         if (playerViewportPos.x <= 0)
         {
             originalPlayerPos.x = -originalPlayerPos.x - 1f;
-            transform.position = originalPlayerPos;
+            
         }
 
         if (playerViewportPos.y >= 0.98)
         {
             originalPlayerPos.y = -originalPlayerPos.y + 1f;
-            transform.position = originalPlayerPos;
+            
         }
 
         if (playerViewportPos.y <= 0)
         {
             originalPlayerPos.y = -originalPlayerPos.y - 1f;
-            transform.position = originalPlayerPos;
+            
         }
+
+        transform.position = originalPlayerPos;
     }
 
 
     void RotateToVelocity()
     {
-        if (rb.velocity.sqrMagnitude < tolerance * tolerance)
+        if (rb.velocity == Vector3.zero)
         {
 
             return;
