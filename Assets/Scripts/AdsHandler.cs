@@ -64,6 +64,7 @@ public class AdsHandler : MonoBehaviour
     {
         print("Sdk is initialized !!");
         LoadBanner();
+        DisplayBanner();
     }
 
     private void OnApplicationPause(bool pause)
@@ -82,7 +83,7 @@ public class AdsHandler : MonoBehaviour
         IronSource.Agent.hideBanner();
     }
 
-    void DisplayBanner()
+    public void DisplayBanner()
     {
         IronSource.Agent.displayBanner();
     }
