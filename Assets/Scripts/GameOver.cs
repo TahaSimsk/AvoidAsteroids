@@ -14,21 +14,38 @@ public class GameOver : MonoBehaviour
 
     public void ContinueButton()
     {
-        AdsHandler.Instance.LoadRewarded();
-        AdsHandler.Instance.ShowRewarded();
+        if (AdsHandler.Instance.rewardedVideoReady)
+        {
+            IronSource.Agent.showRewardedVideo();
+            continueButton.interactable = false;
+        }
 
-        
-        continueButton.interactable = false;
     }
 
     public void PlayAgain()
     {
-        SceneManager.LoadScene(1);
+
+
+
+        if (AdsHandler.Instance.interstitialReady)
+        {
+            IronSource.Agent.showInterstitial();
+            IronSource.Agent.hideBanner();
+            SceneManager.LoadScene(1);
+        }
+
     }
 
     public void MainMenu()
     {
-        SceneManager.LoadScene(0);
+
+        if (AdsHandler.Instance.interstitialReady)
+        {
+            IronSource.Agent.showInterstitial();
+            IronSource.Agent.displayBanner();
+            SceneManager.LoadScene(0);
+        }
+
     }
 
     //public void Die()

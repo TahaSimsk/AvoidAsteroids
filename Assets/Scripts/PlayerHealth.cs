@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -28,7 +29,7 @@ public class PlayerHealth : MonoBehaviour
         {
             Die();
         }
-        
+
     }
 
 
@@ -40,8 +41,13 @@ public class PlayerHealth : MonoBehaviour
 
         gameObject.SetActive(false);
         gameOverMenu.SetActive(true);
+
+        IronSource.Agent.displayBanner();
+
     }
 
+
+    //continue the game if they died and pressed the continue button to watch a rewarded ad
     public void ContinueGame()
     {
         isDead = false;
@@ -51,6 +57,8 @@ public class PlayerHealth : MonoBehaviour
         scoreSystem.gameObject.SetActive(true);
         currentHealth = maxHealth;
         transform.position = Vector3.zero;
+
+        IronSource.Agent.hideBanner();
     }
 
     public void Crash(float damage)
@@ -59,10 +67,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= damage;
     }
 
-    void DisablePlayer()
-    {
-        gameObject.SetActive(false);
-    }
+
 
     public void PassPlayerHealth()
     {
