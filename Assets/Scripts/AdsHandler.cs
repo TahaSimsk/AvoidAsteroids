@@ -9,7 +9,9 @@ public class AdsHandler : MonoBehaviour
 
     PlayerHealth playerHealth;
 
-    string appKey = "1b984019d";
+    string appKey = "85460dcd";
+    string myAppKey = "1b984019d";
+    string demoAppKey = "85460dcd";
 
     [HideInInspector] public bool interstitialReady;
     [HideInInspector] public bool rewardedVideoReady;
@@ -142,7 +144,7 @@ public class AdsHandler : MonoBehaviour
     //Invoked when the banner loading process has failed.
     void BannerOnAdLoadFailedEvent(IronSourceError ironSourceError)
     {
-        
+
         LoadBanner();
         Debug.Log("BannerOnAdLoadFailedEvent");
     }
@@ -208,7 +210,7 @@ public class AdsHandler : MonoBehaviour
     // When using server-to-server callbacks, you may ignore this event and wait for the ironSource server callback.
     void RewardedVideoOnAdRewardedEvent(IronSourcePlacement placement, IronSourceAdInfo adInfo)
     {
-        
+
         playerHealth.ContinueGame();
 
         Debug.Log("RewardedVideoOnAdRewardedEvent");
@@ -216,7 +218,7 @@ public class AdsHandler : MonoBehaviour
     // The rewarded video ad was failed to show.
     void RewardedVideoOnAdShowFailedEvent(IronSourceError error, IronSourceAdInfo adInfo)
     {
-        
+
         Debug.Log("RewardedVideoOnAdShowFailedEvent");
     }
     // Invoked when the video ad was clicked.
