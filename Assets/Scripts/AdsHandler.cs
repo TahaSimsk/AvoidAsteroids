@@ -10,6 +10,8 @@ public class AdsHandler : MonoBehaviour
     PlayerHealth playerHealth;
 
     string appKey = "1b984019d";
+    string myAppKey = "1b984019d";
+    string demoAppKey = "85460dcd";
 
     [HideInInspector] public bool interstitialReady;
     [HideInInspector] public bool rewardedVideoReady;
@@ -142,9 +144,9 @@ public class AdsHandler : MonoBehaviour
     //Invoked when the banner loading process has failed.
     void BannerOnAdLoadFailedEvent(IronSourceError ironSourceError)
     {
-        
+
         LoadBanner();
-        Debug.Log("BannerOnAdLoadFailedEvent");
+        Debug.Log($"Banner Failed to Load Because: {ironSourceError}");
     }
     // Invoked when end user clicks on the banner ad
     void BannerOnAdClickedEvent(IronSourceAdInfo adInfo)
@@ -208,7 +210,7 @@ public class AdsHandler : MonoBehaviour
     // When using server-to-server callbacks, you may ignore this event and wait for the ironSource server callback.
     void RewardedVideoOnAdRewardedEvent(IronSourcePlacement placement, IronSourceAdInfo adInfo)
     {
-        
+
         playerHealth.ContinueGame();
 
         Debug.Log("RewardedVideoOnAdRewardedEvent");
@@ -216,8 +218,8 @@ public class AdsHandler : MonoBehaviour
     // The rewarded video ad was failed to show.
     void RewardedVideoOnAdShowFailedEvent(IronSourceError error, IronSourceAdInfo adInfo)
     {
-        
-        Debug.Log("RewardedVideoOnAdShowFailedEvent");
+
+        Debug.Log("RewardedVideoOnAdShowFailedEvent" + error);
     }
     // Invoked when the video ad was clicked.
     // This callback is not supported by all networks, and we recommend using it only if
@@ -248,7 +250,7 @@ public class AdsHandler : MonoBehaviour
     {
         interstitialReady = false;
         LoadInterstitialVideo();
-        Debug.Log("InterstitialOnAdLoadFailed");
+        Debug.Log("InterstitialOnAdLoadFailed" + ironSourceError);
     }
 
     // Invoked when the Interstitial Ad Unit has opened. This is the impression indication. 
@@ -270,7 +272,7 @@ public class AdsHandler : MonoBehaviour
     {
         //interstitialReady = false;
         LoadInterstitialVideo();
-        Debug.Log("InterstitialOnAdShowFailedEvent");
+        Debug.Log("InterstitialOnAdShowFailedEvent" + ironSourceError);
     }
 
     // Invoked when the interstitial ad closed and the user went back to the application screen.

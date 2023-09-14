@@ -19,18 +19,26 @@ public class GameOver : MonoBehaviour
             IronSource.Agent.showRewardedVideo();
             continueButton.interactable = false;
         }
+        else
+        {
+            continueButton.interactable = false;
+        }
 
     }
 
     public void PlayAgain()
     {
 
-
+        
 
         if (AdsHandler.Instance.interstitialReady)
         {
             IronSource.Agent.showInterstitial();
             IronSource.Agent.hideBanner();
+            SceneManager.LoadScene(1);
+        }
+        else
+        {
             SceneManager.LoadScene(1);
         }
 
@@ -43,6 +51,10 @@ public class GameOver : MonoBehaviour
         {
             IronSource.Agent.showInterstitial();
             IronSource.Agent.displayBanner();
+            SceneManager.LoadScene(0);
+        }
+        else
+        {
             SceneManager.LoadScene(0);
         }
 
