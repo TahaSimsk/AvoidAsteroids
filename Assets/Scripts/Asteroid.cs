@@ -6,16 +6,14 @@ public class Asteroid : MonoBehaviour
 {
     [SerializeField] float damage;
 
-    //private void Start()
-    //{
-    //    Renderer renderer = GetComponent<Renderer>();
-    //    renderer.sortingLayerName = "Asteroid";
-    //}
     bool hasCrashed;
+
+
     void Start()
     {
         hasCrashed = false;
     }
+
 
     void OnCollisionEnter(Collision other)
     {
@@ -29,9 +27,8 @@ public class Asteroid : MonoBehaviour
             hasCrashed = true;
             playerHealth.Crash(damage);
         }
-        
-
     }
+
 
     void OnBecameInvisible()
     {

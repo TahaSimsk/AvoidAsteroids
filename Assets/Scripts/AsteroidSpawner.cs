@@ -36,6 +36,7 @@ public class AsteroidSpawner : MonoBehaviour
         DifficultyMultiplierTimer();
     }
 
+
     void SpawnAsteroidTimer()
     {
         timerBetweenAsteroids -= Time.deltaTime;
@@ -45,6 +46,7 @@ public class AsteroidSpawner : MonoBehaviour
             timerBetweenAsteroids = secondsBetweenAsteroids;
         }
     }
+
 
     void SpawnAsteroid()
     {
@@ -90,17 +92,6 @@ public class AsteroidSpawner : MonoBehaviour
 
         rb = asteroidInstance.GetComponent<Rigidbody>();
         rb.velocity = direction.normalized * Random.Range(forceRange.x, forceRange.y) * difficultyMultiplier;
-        
-    }
-
-
-    void FixedUpdate()
-    {
-
-
-
-
-
     }
 
 
@@ -113,10 +104,5 @@ public class AsteroidSpawner : MonoBehaviour
             timerForAsteroidVelocityDifficulty = secondsForAsteroidVelocityDifficulty;
             difficultyMultiplier += difficultyMultiplierFloat;
         }
-
-        
-
     }
-
-
 }

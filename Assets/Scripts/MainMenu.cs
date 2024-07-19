@@ -20,6 +20,7 @@ public class MainMenu : MonoBehaviour
         {
             SceneManager.LoadScene(1);
         }
+        IronSource.Agent.hideBanner();
 
     }
 

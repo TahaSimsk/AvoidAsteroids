@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class AdsHandler : MonoBehaviour
 {
-
     PlayerHealth playerHealth;
 
     string appKey = "1b984019d";
@@ -15,7 +14,6 @@ public class AdsHandler : MonoBehaviour
 
     [HideInInspector] public bool interstitialReady;
     [HideInInspector] public bool rewardedVideoReady;
-
 
     //Making this script singleton
     public static AdsHandler Instance;
@@ -33,6 +31,7 @@ public class AdsHandler : MonoBehaviour
         }
     }
 
+
     void Start()
     {
         IronSource.Agent.validateIntegration();
@@ -40,9 +39,9 @@ public class AdsHandler : MonoBehaviour
 
     }
 
+
     private void OnEnable()
     {
-
         IronSourceEvents.onSdkInitializationCompletedEvent += SDKInitialized;
 
         #region AdInfo Banner Events
@@ -73,8 +72,8 @@ public class AdsHandler : MonoBehaviour
         IronSourceInterstitialEvents.onAdShowFailedEvent += InterstitialOnAdShowFailedEvent;
         IronSourceInterstitialEvents.onAdClosedEvent += InterstitialOnAdClosedEvent;
         #endregion
-
     }
+
 
     void SDKInitialized()
     {
@@ -84,22 +83,18 @@ public class AdsHandler : MonoBehaviour
         LoadRewardedVideo();
     }
 
+
     private void OnApplicationPause(bool pause)
     {
         IronSource.Agent.onApplicationPause(pause);
     }
 
 
-
-    //Methods
-
-
-
     public void LoadBanner()
     {
         IronSource.Agent.loadBanner(IronSourceBannerSize.SMART, IronSourceBannerPosition.BOTTOM);
-
     }
+
 
     //banner is hidden when the play button pressed to start the game in the main menu scene
     public void HideBanner()
@@ -108,19 +103,10 @@ public class AdsHandler : MonoBehaviour
     }
 
 
-
     void LoadRewardedVideo()
     {
         IronSource.Agent.loadRewardedVideo();
     }
-
-
-    //Get the Player Health Component from a different scene thanks to using singleton
-    public void GetPlayerHeatlh(PlayerHealth playerHealth)
-    {
-        this.playerHealth = playerHealth;
-    }
-
 
 
     void LoadInterstitialVideo()
@@ -129,40 +115,54 @@ public class AdsHandler : MonoBehaviour
     }
 
 
+    public void GetPlayerHeatlh(PlayerHealth playerHealth)
+    {
+        this.playerHealth = playerHealth;
+    }
 
 
-    //Callbacks
 
     #region BannerCallbacks
 
     /************* Banner AdInfo Delegates *************/
+
+
     //Invoked once the banner has loaded
     void BannerOnAdLoadedEvent(IronSourceAdInfo adInfo)
     {
         Debug.Log("BannerOnAdLoadedEvent");
     }
+
+
     //Invoked when the banner loading process has failed.
     void BannerOnAdLoadFailedEvent(IronSourceError ironSourceError)
     {
-
         LoadBanner();
         Debug.Log($"Banner Failed to Load Because: {ironSourceError}");
     }
+
+
     // Invoked when end user clicks on the banner ad
     void BannerOnAdClickedEvent(IronSourceAdInfo adInfo)
     {
         Debug.Log("BannerOnAdClickedEvent");
     }
+
+
     //Notifies the presentation of a full screen content following user click
     void BannerOnAdScreenPresentedEvent(IronSourceAdInfo adInfo)
     {
         Debug.Log("BannerOnAdScreenPresentedEvent");
     }
+
+
     //Notifies the presented screen has been dismissed
     void BannerOnAdScreenDismissedEvent(IronSourceAdInfo adInfo)
     {
         Debug.Log("BannerOnAdScreenDismissedEvent");
     }
+
+
     //Invoked when the user leaves the app
     void BannerOnAdLeftApplicationEvent(IronSourceAdInfo adInfo)
     {
@@ -172,12 +172,11 @@ public class AdsHandler : MonoBehaviour
     #endregion
 
 
-
-
-
     #region RewardedVideoCallbacks
 
     /************* RewardedVideo AdInfo Delegates *************/
+
+
     // Indicates that there’s an available ad.
     // The adInfo object includes information about the ad that was loaded successfully
     // This replaces the RewardedVideoAvailabilityChangedEvent(true) event
@@ -186,6 +185,8 @@ public class AdsHandler : MonoBehaviour
         rewardedVideoReady = true;
         Debug.Log("RewardedVideoOnAdAvailable");
     }
+
+
     // Indicates that no ads are available to be displayed
     // This replaces the RewardedVideoAvailabilityChangedEvent(false) event
     void RewardedVideoOnAdUnavailable()
@@ -194,33 +195,40 @@ public class AdsHandler : MonoBehaviour
         LoadRewardedVideo();
         Debug.Log("RewardedVideoOnAdUnavailable");
     }
+
+
     // The Rewarded Video ad view has opened. Your activity will loose focus.
     void RewardedVideoOnAdOpenedEvent(IronSourceAdInfo adInfo)
     {
         Debug.Log("RewardedVideoOnAdOpenedEvent");
     }
+
+
     // The Rewarded Video ad view is about to be closed. Your activity will regain its focus.
     void RewardedVideoOnAdClosedEvent(IronSourceAdInfo adInfo)
     {
         //LoadRewardedVideo();
         Debug.Log("RewardedVideoOnAdClosedEvent");
     }
+
+
     // The user completed to watch the video, and should be rewarded.
     // The placement parameter will include the reward data.
     // When using server-to-server callbacks, you may ignore this event and wait for the ironSource server callback.
     void RewardedVideoOnAdRewardedEvent(IronSourcePlacement placement, IronSourceAdInfo adInfo)
     {
-
         playerHealth.ContinueGame();
-
-        Debug.Log("RewardedVideoOnAdRewardedEvent");
     }
+
+
     // The rewarded video ad was failed to show.
     void RewardedVideoOnAdShowFailedEvent(IronSourceError error, IronSourceAdInfo adInfo)
     {
 
         Debug.Log("RewardedVideoOnAdShowFailedEvent" + error);
     }
+
+
     // Invoked when the video ad was clicked.
     // This callback is not supported by all networks, and we recommend using it only if
     // it’s supported by all networks you included in your build.
@@ -230,9 +238,6 @@ public class AdsHandler : MonoBehaviour
     }
 
     #endregion
-
-
-
 
 
     #region InterstitialCallbacks

@@ -17,8 +17,8 @@ public class Store : MonoBehaviour
         {
             PlayerPrefs.SetInt(NewShipRedSparrowKey, 1);
         }
-
     }
+
     
     public void OnPurchaseFailed(Product product, PurchaseFailureDescription description)
     {
